@@ -1,0 +1,112 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the resume builder */
+.resume-builder {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.resume-builder h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Section Styling */
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    min-height: 50px;
+    background-color: #fafafa;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+    outline: none; /* Removes outline for cleaner design */
+}
+
+/* On focus, make the section's border bold and color it */
+.section:focus {
+    border: 2px solid #4CAF50;
+    background-color: #ffffff;
+}
+
+/* Style for the buttons */
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+/* Shareable Link Section Styling */
+#shareableLink {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#shareableLink input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+    background-color: #f8f8f8;
+}
+
+#shareableLink label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .resume-builder {
+        padding: 15px;
+        margin: 20px;
+    }
+
+    .resume-builder h1 {
+        font-size: 28px;
+    }
+
+    .section {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

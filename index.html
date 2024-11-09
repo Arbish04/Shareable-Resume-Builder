@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shareable Resume Builder</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the resume builder */
+        .resume-builder {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title Styling */
+        .resume-builder h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            min-height: 50px;
+            background-color: #fafafa;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+            outline: none; /* Removes outline for cleaner design */
+        }
+
+        /* On focus, make the section's border bold and color it */
+        .section:focus {
+            border: 2px solid #4CAF50;
+            background-color: #ffffff;
+        }
+
+        /* Style for the buttons */
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        /* Shareable Link Section Styling */
+        #shareableLink {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #shareableLink input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 10px;
+            background-color: #f8f8f8;
+        }
+
+        #shareableLink label {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .resume-builder {
+                padding: 15px;
+                margin: 20px;
+            }
+
+            .resume-builder h1 {
+                font-size: 28px;
+            }
+
+            .section {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-builder">
+        <h1 contenteditable="true" class="title">Shareable Resume Builder</h1>
+
+        <!-- Resume sections -->
+        <div class="section" contenteditable="true" data-section="Name">Name: Your Name</div>
+        <div class="section" contenteditable="true" data-section="Contact">Contact: Your Contact Info</div>
+        <div class="section" contenteditable="true" data-section="Education">Education: Your Education Details</div>
+        <div class="section" contenteditable="true" data-section="Experience">Experience: Your Work Experience</div>
+        <div class="section" contenteditable="true" data-section="Skills">Skills: Your Skills</div>
+
+        <!-- Buttons for sharing and downloading -->
+        <button class="button" id="shareResume">Generate Shareable Link</button>
+        <button class="button" id="downloadResume">Download as PDF</button>
+
+        <!-- Display shareable URL -->
+        <div id="shareableLink">
+            <label for="link">Your Resume URL:</label>
+            <input type="text" id="link" readonly>
+        </div>
+    </div>
+
+    <!-- Include jsPDF library for PDF download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        // Generate unique URL for the resume
+        document.getElementById('shareResume').addEventListener('click', function() {
+            // Get the username (this could be from user input, here using a placeholder)
+            const username = prompt("Enter your username:");
+
+            // Generate the unique URL (example: username.vercel.app/resume)
+            const resumeURL = `https://yourusername.vercel.app/resume/${username}`;
+
+            // Display the generated URL
+            document.getElementById('link').value = resumeURL;
+            document.getElementById('shareableLink').style.display = 'block';
+        });
+
+        // Download the resume as a PDF
+        document.getElementById('downloadResume').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Capture the resume content
+            let resumeContent = '';
+            document.querySelectorAll('.section').forEach(function(element) {
+                resumeContent += `${element.innerText}\n\n`;
+            });
+
+            // Add resume content to PDF
+            doc.text(resumeContent, 10, 10);
+            doc.save('resume.pdf');
+        });
+    </script>
+
+</body>
+</html>
+
